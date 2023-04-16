@@ -7,7 +7,10 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'login': "url('src/assets/auth-bg.jpg')"
+        'login': "url('src/assets/auth-bg.jpg')",
+        'user-ken': "url('src/assets/user-logo.png')",
+        'user-ken2': "url('src/assets/user-logo2.webp')",
+        'user-other': "url('src/assets/user-other.jpeg')"
       },
       fontFamily: {
         'poppins': 'Poppins, sans-serif'

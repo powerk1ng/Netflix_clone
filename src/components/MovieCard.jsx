@@ -28,26 +28,31 @@ const MovieCard = ({
     <div className="rounded-t-md border-b-white border-b rounded-b-md shadow-md shadow-white/40">
       {/* card top */}
       <div className="w-full h-[220px]">
-        <img
-          className="w-full h-full object-cover rounded-t-md"
-          src={
-            `https://image.tmdb.org/t/p/w500${backdrop_path ?? poster_path}` ||
-            "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
-          }
-        />
+        {backdrop_path || poster_path ? (
+          <img
+            className="w-full h-full object-cover rounded-t-md"
+            src={`https://image.tmdb.org/t/p/w500${
+              backdrop_path ?? poster_path
+            }`}
+          />
+        ) : (
+          <img
+            className="w-full h-[220px]"
+            src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+          />
+        )}
       </div>
 
       {/* card bottom */}
-      <div className="text-white pt-1 font-poppins flex flex-col justify-between min-h-[180px] px-2">
-        
+      <div className="font-poppins text-white min-h-[180px] flex flex-col justify-between pt-1 px-2">
         {/* card bottom movie info */}
         <div>
           <h2>{title}</h2>
-          <p className="my-2">{formatDate(releaseDate)}</p>
+          <p className="my-2">{!releaseDate ? 'N/A' : formatDate(releaseDate)}</p>
           <div>
-            {vote_average.toFixed(1) || "N/A"}{" "}
+            {vote_average > 0 ? vote_average.toFixed(1) : 'N/A'}
             <Rate
-              className="hover:pointer-events-none"
+              className="hover:pointer-events-none ml-2"
               allowHalf
               defaultValue={Math.round(vote_average / 2)}
             />
@@ -55,17 +60,17 @@ const MovieCard = ({
         </div>
 
         {/* card bottom movie buttons */}
-        <div className="flex items-center w-full py-3 duration-300 hover:opacity-100 justify-between">
+        <div className="w-full flex items-center justify-between hover:opacity-100 py-3 duration-300">
           <Link
             to={`/movie/${id}`}
-            className="w-10 h-10 rounded-full flex justify-center items-center bg-white hover:bg-green-400 active:scale-90 duration-300"
+            className="w-10 h-10 flex justify-center items-center bg-white hover:bg-green-400 active:scale-90 rounded-full duration-300"
           >
             <FiPlay className="fill-black" size={20} />
           </Link>
 
           <button
             onClick={handleAddToFavourite}
-            className={`rounded-full w-10 h-10 flex items-center justify-center peer md:hover:opacity-90 duration-200 ${
+            className={`w-10 h-10 flex items-center justify-center md:hover:opacity-90 rounded-full peer duration-200 ${
               like ? "bg-green-400" : "bg-white"
             }`}
           >

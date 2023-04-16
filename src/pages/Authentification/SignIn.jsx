@@ -1,43 +1,43 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import Logo from "../../assets/logo.png";
-
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        setEmail('');
-        setPassword('');
-        setError('');
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "auth/invalid-email":
-            setError("Invalid email");
-            break;
-          case "auth/user-disabled":
-            setError("User account has been disabled");
-            break;
-          case "auth/user-not-found":
-            setError("User not found");
-            break;
-          case "auth/wrong-password":
-            setError("Incorrect password");
-            break;
-          default:
-            setError("Something went wrong. Please try again.");
-            break;
-        }
-      });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setTimeout(() => navigate("/"), 100);
+      setEmail("");
+      setPassword("");
+      setError("");
+    } catch (error) {
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Invalid email");
+          break;
+        case "auth/user-disabled":
+          setError("User account has been disabled");
+          break;
+        case "auth/user-not-found":
+          setError("User not found");
+          break;
+        case "auth/wrong-password":
+          setError("Incorrect password");
+          break;
+        default:
+          setError("Something went wrong. Please try again.");
+          break;
+      }
+    }
   };
 
   return (

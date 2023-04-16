@@ -1,41 +1,43 @@
 import { Link } from "react-router-dom";
 import { FiPlay } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useContext } from "react";
+
 
 import MainContext from "../useContext/MainContext";
 import ModalWindow from "./ModalWindow";
 
+const FavouriteMovieItem = ({ img, title, id, movies }) => {
 
-const FavouriteMovieItem = ({ img, title, id, movies}) => {
-  const {user} = useContext(MainContext);
-
+  const { user } = useContext(MainContext);
   const [modalIsOpen, setModalIsopen] = useState(false);
 
   const setModal = () => {
     setModalIsopen(!modalIsOpen);
   };
 
-  
-  const movieRef = doc(db, 'users', `${user?.email}`);
-
+  const movieRef = doc(db, "users", `${user?.email}`);
   const deleteMovie = async (passedId) => {
-      try {
-        const result = movies.filter(item => item.id !== passedId);
-        await updateDoc(movieRef, {
-          saveShows: result
-        })
-        setModal();
-      } catch (error) {
-        console.log(error);
-      }
-  }
+    try {
+      const result = movies.filter((item) => item.id !== passedId);
+      await updateDoc(movieRef, {
+        saveShows: result,
+      });
+      setModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="shadow-lg md:shadow-white/40 shadow-green-400 duration-300 md:hover:shadow-xl md:hover:shadow-green-400">
-      <ModalWindow modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsopen} setModal={setModal} deleteMovie={() => deleteMovie(id)} />    
+    <div className="shadow-lg md:shadow-white/40 shadow-green-400  md:hover:shadow-xl md:hover:shadow-green-400 duration-300">
+      <ModalWindow
+        modalIsOpen={modalIsOpen} 
+        setModalIsOpen={setModalIsopen}
+        setModal={setModal}
+        deleteMovie={() => deleteMovie(id)}
+      />
       <div className="w-full h-[250px]">
         <img
           className="w-full h-full object-cover rounded-t-md"
@@ -59,8 +61,11 @@ const FavouriteMovieItem = ({ img, title, id, movies}) => {
           </Link>
 
           <button
-            onClick={setModal} 
-            className="w-10 h-10 rounded-full flex justify-center items-center bg-white hover:bg-green-400 text-black font-bold active:scale-90 duration-300">X</button>
+            onClick={setModal}
+            className="w-10 h-10 rounded-full flex justify-center items-center bg-white hover:bg-green-400 text-black font-bold active:scale-90 duration-300"
+          >
+            X
+          </button>
         </div>
       </div>
     </div>

@@ -3,12 +3,12 @@ import { GrClose } from "react-icons/gr";
 const ModalWindow = ({ modalIsOpen, setModal, deleteMovie }) => {
   return (
     <div
-      className={`bg-black/50 z-[999] w-full h-screen flex items-center justify-center ${
+      className={`bg-black/50 flex items-center justify-center w-full h-screen z-[999] ${
         modalIsOpen ? "fixed left-0 top-0" : "hidden"
       }`}
     >
       {/* text-body */}
-      <div className="relative p-4 bg-white rounded-md shadow-md shadow-black/70">
+      <div className="shadow-black/70 bg-white relative shadow-md rounded-md p-4">
         <span onClick={setModal} className="absolute right-3 top-2.5 cursor-pointer">
           <GrClose size={20} />
         </span>
@@ -22,16 +22,16 @@ const ModalWindow = ({ modalIsOpen, setModal, deleteMovie }) => {
             <p className="text-center">This process cannot be undone</p>
           </div>
 
-          <div className="flex items-center gap-x-4 justify-center mt-4">
+          <div className="flex items-center justify-center gap-x-4 mt-4">
             <button 
                 onClick={deleteMovie}
-                className="bg-red-500 text-white px-4 py-2 hover:brightness-75 duration-200">
+                className="bg-red-500 text-white hover:brightness-75 px-4 py-2 duration-200">
                 
               Delete
             </button>
             <button
               onClick={setModal}
-              className="bg-blue-500 text-white px-4 py-2 hover:brightness-75 duration-200"
+              className="bg-blue-500 text-white hover:brightness-75 duration-200 px-4 py-2"
             >
               Cancel
             </button>

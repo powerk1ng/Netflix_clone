@@ -4,7 +4,7 @@
      const month =
          date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
      const year = date.getFullYear();
-     return `${day}.${month}.${year}`;
+     return `${day}.${month}.${year}`;  
  }
 
  export default formatDate

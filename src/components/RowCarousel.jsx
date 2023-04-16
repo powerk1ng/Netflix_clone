@@ -49,7 +49,7 @@ const RowCarousel = ({ title, fetchUrl }) => {
   return (
     <div className="pl-2">
       <h2 className="text-white font-bold py-4">{title}</h2>
-      <div className="flex items-center relative">
+      <div className="relative flex items-center">
         {/* slider-left-button */}
         <button
           onClick={() => slideOnArrowClick(-1)}
@@ -62,7 +62,7 @@ const RowCarousel = ({ title, fetchUrl }) => {
         <div
           ref={scrollRef}
           id={"slider"}
-          className="h-full whitespace-nowrap scroll-smooth scrollbar-hide relative outline-none overflow-y-hidden"
+          className="h-full relative scroll-smooth scrollbar-hide overflow-y-hidden whitespace-nowrap outline-none"
           style={{ overflowX: "scroll" }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}

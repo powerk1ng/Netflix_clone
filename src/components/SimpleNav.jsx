@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <header
-      className={`flex justify-between items-center p-4 z-[100] fixed w-full ${navClass} duration-700`}
+      className={`flex justify-between items-center fixed w-full ${navClass} p-4 z-[100] duration-700`}
     >
       <nav>
         <Link to="/" onClick={resetSearchInput}>

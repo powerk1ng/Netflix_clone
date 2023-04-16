@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 
@@ -6,13 +6,17 @@ import Logo from "../assets/logo.png";
 import MainContext from "../useContext/MainContext";
 import SearchInput from "./SearchInput";
 import LogoutBtn from "./LogoutBtn";
+import UserDropDownMenu from "./UserDropDownMenu";
+import getUserName from "../utils/getNameOfUser";
+
 
 const Header = () => {
   const [navClass, setNavClass] = useState("");
-  const { resetSearchInput } = useContext(MainContext);
+  const { resetSearchInput, user } = useContext(MainContext);
   const [click, setClick] = useState(false);
   const location = useLocation();
   const myListBgColor = location.pathname === "/mylist";
+  const userName = getUserName();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +63,6 @@ const Header = () => {
       <div className="md:flex gap-x-5">
         {/* logo mobile menu body */}
         <div className="flex items-center gap-x-6">
-          
           {/* mobile-menu */}
           <div
             onClick={menuOpen}
@@ -69,7 +72,9 @@ const Header = () => {
             } duration-500`}
           >
             <BiMenuAltLeft
-              className={myListBgColor && click ? "fill-[#b3b3b3]" : "fill-white"}
+              className={
+                myListBgColor && click ? "fill-[#b3b3b3]" : "fill-white"
+              }
               size={25}
             />
           </div>
@@ -88,7 +93,9 @@ const Header = () => {
         >
           <ul
             className={`flex max-md:flex-col lg:gap-x-8 gap-x-5 max-md:gap-y-4 ${
-              myListBgColor ? "max-md:text-[#b3b3b3] text-[#b3b3b3]" : "text-[#b3b3b3]"
+              myListBgColor
+                ? "max-md:text-[#b3b3b3] text-[#b3b3b3]"
+                : "text-[#b3b3b3]"
             } text-[14px] max-md:pt-16 max-md:pl-5`}
           >
             <NavLink to="/" className="nav-link">
@@ -107,18 +114,29 @@ const Header = () => {
               My List
             </NavLink>
 
+            {/* user pic */}
+            <div
+              className={`w-9 h-9 border border-gray-400 rounded-md md:hidden inline-block bg-center bg-cover bg-no-repeat relative ${
+                !userName
+                  ? "bg-gray-500"
+                  : userName === "Ken"
+                  ? "bg-user-ken"
+                  : "bg-user-other"
+              }`}
+            >
+              <span className="absolute -right-10 top-1/2 -translate-y-1/2 text-green-400">- {userName}</span>
+            </div>
+
             {/* logout btn */}
             <LogoutBtn className="max-md:inline-block hidden" />
           </ul>
         </nav>
       </div>
 
-      <div className="flex items-center gap-x-5">
+      <div className="flex items-center md:gap-x-5">
         {/* search input*/}
         <SearchInput />
-
-        {/* logout button */}
-        <LogoutBtn className="max-md:hidden" />
+        <UserDropDownMenu />
       </div>
     </header>
   );

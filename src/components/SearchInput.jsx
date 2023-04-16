@@ -17,15 +17,15 @@ const SearchInput = () => {
     <>
       {!hideSearch && (
         <div
-          className={`${
+          className={`font-sans text-white flex md:items-center h-9 px-2${
             toggleSearch
-              ? "lg:w-[220px] w-[165px] border-2 border-white bg-black/70 duration-700"
-              : "md:w-[0] w-[230px] max-[420px]:w-[170px] border-2 md:border-transparent duration-500"
-          } items-center h-9 flex px-2  text-white font-sans`}
+              ? "bg-black/70 md:w-[230px] w-[220px] max-[456px]:w-[140px] border-2 border-white duration-700"
+              : "w-0 max-md:w-[220px] max-[456px]:w-[140px] border-2 md:border-transparent duration-500"
+          }`}
         >
           <label
             htmlFor="search-input"
-            className="max-md:hidden absolute cursor-pointer bg-transparent max-md:right-0"
+            className="absolute bg-transparent max-md:right-0 max-md:hidden cursor-pointer"
           >
             <BsSearch
               className={`${
@@ -40,7 +40,7 @@ const SearchInput = () => {
             onChange={handleSearchVal}
             value={searchVal}
             id="search-input"
-            className="md:pl-6 text-[12px] pr-2 outline-none w-full h-full bg-transparent"
+            className="text-[12px] bg-transparent w-full h-full pr-2 md:pl-6 pl-2 outline-none"
             type="text"
             placeholder="Search for the movie.."
             required

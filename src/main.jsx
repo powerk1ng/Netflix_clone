@@ -8,25 +8,20 @@ import ReactDOM from "react-dom/client";
 import router from "./Routing/routing";
 import MainContext from "./useContext/MainContext";
 
-
 import "./index.css";
 
 const App = () => {
   const [searchVal, setSearchVal] = useState("");
   const [toggleSearch, setToggleSearch] = useState(false);
   const [user, setUser] = useState(null);
-  
-  
-  // reset search input and hide at home comp.
+  const [loading, setLoading] = useState(true);
+
   const resetSearchInput = () => {
     setSearchVal("");
     setToggleSearch(false);
   };
 
-  // add movie to myList
-  const movieID = doc(db, 'users', `${user?.email}`)  
-  
-  
+  const movieID = doc(db, "users", `${user?.email}`);
 
   const saveMovie = async (id, title, img) => {
     if (user?.email) {
@@ -39,11 +34,16 @@ const App = () => {
       });
     }
   };
+  
 
-  // check auth state
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => setUser(currentUser))
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return unsubscribe;
   }, []);
+  
 
   const obj = {
     toggleSearch,
@@ -52,7 +52,8 @@ const App = () => {
     searchVal,
     setSearchVal,
     user,
-    saveMovie
+    saveMovie,
+    loading
   };
 
   return (
