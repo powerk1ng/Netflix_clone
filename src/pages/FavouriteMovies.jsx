@@ -59,7 +59,7 @@ const FavouriteMovies = () => {
       )}
 
       {movies && movies.length ? (
-        <div className="text-white grid lg:grid-cols-4 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-4 gap-y-10 py-5">
+        <div className="text-white grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-10 py-5">
           {movies.map((item) => (
             <FavouriteMovieItem key={item.id} {...item} movies={movies} />
           ))}

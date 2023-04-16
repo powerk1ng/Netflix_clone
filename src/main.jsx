@@ -7,7 +7,7 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import ReactDOM from "react-dom/client";
 import router from "./Routing/routing";
 import MainContext from "./useContext/MainContext";
-import SearchInput from "./components/SearchInput";
+
 
 import "./index.css";
 
@@ -16,18 +16,8 @@ const App = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [user, setUser] = useState(null);
   
-  //youtube player options
-  const opts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-      controls: 1,
-      start: 1,
-    },
-  };
-
-  // reset search input and hide
+  
+  // reset search input and hide at home comp.
   const resetSearchInput = () => {
     setSearchVal("");
     setToggleSearch(false);
@@ -35,6 +25,8 @@ const App = () => {
 
   // add movie to myList
   const movieID = doc(db, 'users', `${user?.email}`)  
+  
+  
 
   const saveMovie = async (id, title, img) => {
     if (user?.email) {
@@ -59,16 +51,13 @@ const App = () => {
     resetSearchInput,
     searchVal,
     setSearchVal,
-    opts,
     user,
     saveMovie
   };
 
   return (
     <MainContext.Provider value={obj}>
-      <RouterProvider router={router}>
-        <SearchInput />
-      </RouterProvider>
+      <RouterProvider router={router} />
     </MainContext.Provider>
   );
 };

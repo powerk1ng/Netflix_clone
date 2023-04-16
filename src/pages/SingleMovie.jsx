@@ -1,18 +1,26 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
 import request from "../utils/request.js";
 import SimpleNav from "../components/SimpleNav.jsx";
 import Youtube from "react-youtube";
-import MainContext from "../useContext/MainContext.jsx";
 
 const SingleMovie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   const [trailer, setTrailer] = useState();
-  const { opts } = useContext(MainContext);
+  
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+      controls: 1,
+      start: 1,
+    },
+  };
 
 
   useEffect(() => {
