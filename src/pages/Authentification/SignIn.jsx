@@ -3,19 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import Logo from "../../assets/logo.png";
+import ShowPassword from "./ShowPassword";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setTimeout(() => navigate("/"), 100);
+      setTimeout(() => navigate("/"), 50);
       setEmail("");
       setPassword("");
       setError("");
@@ -80,12 +82,18 @@ const SignIn = () => {
             <input
               autoComplete="off"
               required
-              type="password"
+              type={showPass ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={`form-input peer`}
             />
             <span className="form-span">Password</span>
+            
+            <ShowPassword
+                    password={password}
+                    showPass={showPass}
+                    setShowPass={setShowPass}
+               /> 
           </div>
 
           {/* sign in button */}

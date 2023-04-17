@@ -4,15 +4,17 @@ import { useState } from "react";
 import { auth } from "../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
-import { db } from '../../../firebase';
+import { db } from "../../../firebase";
 
 import Logo from "../../assets/logo.png";
 import signUpSchema from "./signUpSchema.js";
+import ShowPassword from "./ShowPassword";
 
 const SignUp = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState("");
-
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -36,10 +38,10 @@ const SignUp = () => {
               return;
             }
 
-            setDoc(doc(db, 'users', values.email), {
-                savedShows: []
-            })      
-                  
+            setDoc(doc(db, "users", values.email), {
+              savedShows: [],
+            });
+
             createUserWithEmailAndPassword(auth, values.email, values.password)
               .then(() => {
                 setFormSubmitted(true);
@@ -48,7 +50,7 @@ const SignUp = () => {
                   setFormSubmitted(false);
                   resetForm();
                   navigate("/");
-                }, 1000);
+                }, 500);
               })
               .catch((error) => {
                 switch (error.code) {
@@ -66,7 +68,7 @@ const SignUp = () => {
               });
           }}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, values }) => (
             <Form className="max-md:mt-5 min-h-[640px] max-w-[500px] mx-auto min-[555px]:pt-14 min-[555px]:px-16 min-[555px]:pb-10 bg-black/60 flex flex-col gap-y-10">
               <h2 className="min-[555px]:text-[32px] text-[24px] font-medium text-white">
                 Sign Up
@@ -105,7 +107,7 @@ const SignUp = () => {
                 <Field
                   required
                   name="password"
-                  type="password"
+                  type={showPass ? "text" : "password"}
                   className={`form-input peer ${
                     errors.password && touched.password
                       ? "border-b-[#E87C03]"
@@ -116,6 +118,14 @@ const SignUp = () => {
                 {errors.password && touched.password && (
                   <p className="form-error">{errors.password}</p>
                 )}
+
+                {values.password && (
+                  <ShowPassword
+                    password={values.password}
+                    showPass={showPass}
+                    setShowPass={setShowPass}
+                  />
+                )}
               </div>
 
               {/* reconfirm password */}
@@ -123,7 +133,7 @@ const SignUp = () => {
                 <Field
                   required
                   name="confirmPassword"
-                  type="password"
+                  type={showConfirmPass ? 'text' : 'password'}
                   className={`form-input peer ${
                     errors.confirmPassword && touched.confirmPassword
                       ? "border-b-[#E87C03]"
@@ -135,8 +145,15 @@ const SignUp = () => {
                 {errors.confirmPassword && touched.confirmPassword && (
                   <p className="form-error">{errors.confirmPassword}</p>
                 )}
+
+                <ShowPassword
+                    password={values.confirmPassword}
+                    showPass={showConfirmPass}
+                    setShowPass={setShowConfirmPass}
+                  />
               </div>
 
+              {/* acceot terms */}
               <div className="flex items-center gap-x-2">
                 <Field
                   name="accept"

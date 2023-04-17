@@ -30,9 +30,10 @@ const router = createBrowserRouter(
         <Route path="/mylist" element={<FavouriteMovies />} />
       </Route>
 
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} errorElement={<Error/>} />
       <Route
         path="/login"
+        errorElement={<Error/>}
         element={
           <PrivateLogin>
             <SignIn />

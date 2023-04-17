@@ -41,7 +41,7 @@ const Home = () => {
           />
         </>
       ) : (
-        // searched movies
+        // searched movies component
           <SearchedMovies searchVal={searchVal} />
       )}
     </div>
