@@ -52,4 +52,8 @@
     .form-btn {
         @apply font-medium rounded-[4px] -mt-5 leading-[50px] max-w-full text-white md:hover:brightness-[.80] duration-300
     }
+
+    .genre-btn {
+        @apply block px-4 py-2 hover:bg-gray-600 cursor-pointer
+    }
 }

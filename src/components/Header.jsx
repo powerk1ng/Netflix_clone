@@ -9,7 +9,6 @@ import LogoutBtn from "./LogoutBtn";
 import UserDropDownMenu from "./UserDropDownMenu";
 import getUserName from "../utils/getNameOfUser";
 
-
 const Header = () => {
   const [navClass, setNavClass] = useState("");
   const { resetSearchInput, user } = useContext(MainContext);
@@ -101,30 +100,25 @@ const Header = () => {
             <NavLink to="/" className="nav-link">
               Home
             </NavLink>
-            <NavLink to="/serials" className="nav-link">
-              Tv Shows
-            </NavLink>
             <NavLink to="/movies" className="nav-link">
               Movies
-            </NavLink>
-            <NavLink to="/latest" className="nav-link">
-              Latest
             </NavLink>
             <NavLink to="/mylist" className="nav-link">
               My List
             </NavLink>
 
             {/* user pic */}
-            <div
-              className={`w-9 h-9 border border-gray-400 rounded-md md:hidden inline-block bg-center bg-cover bg-no-repeat relative ${
-                !userName
-                  ? "bg-gray-500"
-                  : userName === "Ken"
-                  ? "bg-user-ken"
-                  : "bg-user-other"
-              }`}
-            >
-              <span className="absolute -right-10 top-1/2 -translate-y-1/2 text-green-400">- {userName}</span>
+            <div className="md:hidden flex gap-x-2 items-center">
+              <div
+                className={`w-9 h-9 border border-gray-400 rounded-md bg-center bg-cover bg-no-repeat ${
+                  !userName
+                    ? "bg-gray-500"
+                    : userName === "Ken"
+                    ? "bg-user-ken"
+                    : "bg-user-other"
+                }`}
+              ></div>
+              <span className="text-green-400">- {userName}</span>
             </div>
 
             {/* logout btn */}

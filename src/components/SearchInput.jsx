@@ -17,10 +17,10 @@ const SearchInput = () => {
     <>
       {!hideSearch && (
         <div
-          className={`font-sans text-white flex md:items-center sm:h-9 h-7 px-2 ${
+          className={`font-sans text-white flex md:items-center sm:h-9 h-7 px-2 duration-500 ${
             toggleSearch
               ? "w-[220px] max-[430px]:w-[140px] max-md:w-[190px] border border-white"
-              : "md:w-0 w-[220px] max-[430px]:w-[140px] max-md:w-[190px] max-md:border border-white"
+              : "md:w-0 w-[220px] max-[430px]:w-[140px] max-md:w-[190px] border-transparent max-md:border max-md:border-white"
           }`}
         >
           <label

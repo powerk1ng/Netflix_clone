@@ -4,7 +4,7 @@ import SimpleNav from "../components/SimpleNav";
 
 const MainLayout = () => {
   const location = useLocation();
-  const hideHeader = location.pathname.startsWith("/movie");
+  const hideHeader = location.pathname.startsWith("/movie") && location.pathname !== '/movies';
   
 
   return (

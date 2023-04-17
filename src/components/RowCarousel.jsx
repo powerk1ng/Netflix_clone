@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import MovieItem from "../components/MovieItem";
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
+import MainContext from "../useContext/MainContext";
 
 const RowCarousel = ({ title, fetchUrl }) => {
   const [data, setData] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [initialMousePosition, setInitialMousePosition] = useState(null);
   const [initialScrollPosition, setInitialScrollPosition] = useState(null);
-
+  const {genreId} = useContext(MainContext);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const RowCarousel = ({ title, fetchUrl }) => {
       .then((data) => {
         setData(data.results);
       });
-  }, []);
+  }, [genreId]);
 
   function handleMouseDown(event) {
     event.preventDefault();

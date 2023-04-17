@@ -17,7 +17,9 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setTimeout(() => navigate("/"), 50);
+      if(auth) {
+        navigate("/")
+      }
       setEmail("");
       setPassword("");
       setError("");

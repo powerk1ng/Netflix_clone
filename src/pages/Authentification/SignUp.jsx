@@ -50,7 +50,7 @@ const SignUp = () => {
                   setFormSubmitted(false);
                   resetForm();
                   navigate("/");
-                }, 500);
+                }, 250);
               })
               .catch((error) => {
                 switch (error.code) {
@@ -166,6 +166,7 @@ const SignUp = () => {
 
               <button
                 type="submit"
+                disabled={setFormSubmitted ? true : false}
                 className={`form-btn ${
                   formSubmitted ? "bg-green-500" : "bg-[#e50914]"
                 }`}

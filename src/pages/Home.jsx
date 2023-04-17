@@ -6,7 +6,7 @@ import MainContext from "../useContext/MainContext.jsx";
 import SearchedMovies from "../components/SearchedMovies.jsx";
 
 const Home = () => {
-  const page = Math.floor(Math.random() * 5 + 1);
+  
   const { searchVal } = useContext(MainContext);
 
   return (
@@ -14,24 +14,24 @@ const Home = () => {
       {!searchVal.length ? (
         <>
           {/* Main element */}
-          <Main fetchUrl={request.requestData("now_playing", page)} trailerVideo={request.requestSingleMovie} />
+          <Main fetchUrl={request.requestData("now_playing")} trailerVideo={request.requestSingleMovie} />
 
           {/* carousel- popular movies */}
           <RowCarousel
             title="Popular"
-            fetchUrl={request.requestData("popular", page)}
+            fetchUrl={request.requestData("popular")}
           />
 
           {/* carousel - Top rated movies*/}
           <RowCarousel
             title="Top rated"
-            fetchUrl={request.requestData("top_rated", page)}
+            fetchUrl={request.requestData("top_rated")}
           />
 
           {/* carousel - upcoming movies */}
           <RowCarousel
             title="Upcoming"
-            fetchUrl={request.requestData("upcoming", page)}
+            fetchUrl={request.requestData("upcoming")}
           />
 
           {/* carousel - upcoming movies */}

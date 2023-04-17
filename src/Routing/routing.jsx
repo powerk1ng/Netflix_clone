@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import PrivateLogin from "./PrivateLogin";
 import FavouriteMovies from "../pages/FavouriteMovies";
 import Error from '../pages/Error';
+import Movies from "../pages/Movies";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         }
       >
         <Route index element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
         <Route path="/movie/:id" element={<SingleMovie />} />
         <Route path="/mylist" element={<FavouriteMovies />} />
       </Route>

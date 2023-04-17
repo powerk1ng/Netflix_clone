@@ -12,6 +12,7 @@ const App = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [genreId, setGenreId] = useState(1);
 
   const resetSearchInput = () => {
     setSearchVal("");
@@ -50,6 +51,8 @@ const App = () => {
     user,
     saveMovie,
     loading,
+    genreId,
+    setGenreId
   };
 
   return (
