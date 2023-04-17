@@ -11,12 +11,14 @@ import SignIn from "../pages/Authentification/SignIn";
 import PrivateRoute from "./PrivateRoute";
 import PrivateLogin from "./PrivateLogin";
 import FavouriteMovies from "../pages/FavouriteMovies";
+import Error from '../pages/Error';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route
         path="/"
+        errorElement={<Error/>}
         element={
           <PrivateRoute>
             <MainLayout />
