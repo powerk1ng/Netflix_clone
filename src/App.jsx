@@ -18,6 +18,7 @@ const App = () => {
     setToggleSearch(false);
   };
 
+  //reference to a Firestore document 
   const movieID = doc(db, "users", `${user?.email}`);
 
   const saveMovie = async (id, title, img) => {
