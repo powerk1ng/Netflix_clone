@@ -22,7 +22,7 @@ const FavouriteMovieItem = ({ img, title, id, movies }) => {
     try {
       const result = movies.filter((item) => item.id !== passedId);
       await updateDoc(movieRef, {
-        saveShows: result,
+        savedShows: result,
       });
       setModal();
     } catch (error) {

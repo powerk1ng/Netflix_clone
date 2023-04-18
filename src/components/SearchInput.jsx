@@ -7,7 +7,7 @@ const SearchInput = () => {
   const { searchVal, setSearchVal, setToggleSearch, toggleSearch } =
     useContext(MainContext);
   const location = useLocation();
-  const hideSearch = location.pathname === "/mylist";
+  const hideSearch = location.pathname === "/mylist" || location.pathname === '/movies';
 
   const handleSearchVal = (e) => {
     setSearchVal(e.target.value);

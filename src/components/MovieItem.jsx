@@ -11,16 +11,16 @@ const MovieItem = ({ id, title, ...movie }) => {
 
   const handleAddToFavourite = () => {
     setLike(!like);
-    saveMovie(id, title, movie?.backdrop_path);
+    saveMovie(id, title, (movie?.backdrop_path ?? movie?.poster_path));
   };
 
   return (
     <div className="relative inline-block h-[240px] w-[250px] md:h-[280px] mr-2 delay-500">
-      {movie?.backdrop_path || movie?.poster_path ? (
+      {movie.backdrop_path || movie.poster_path ? (
         <img
           className="w-full h-full object-cover shadow-xl rounded-md transition duration peer"
           src={`https://image.tmdb.org/t/p/w500${
-            movie?.poster_path ?? movie?.backdrop_path
+            movie.poster_path ?? movie.backdrop_path
           }`}
           alt={title}
         />

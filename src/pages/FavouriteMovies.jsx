@@ -20,7 +20,7 @@ const FavouriteMovies = () => {
       const unsubscribe = onSnapshot(
         doc(db, "users", `${user?.email}`),
         (doc) => {
-          setMovies(doc.data()?.saveShows);
+          setMovies(doc.data()?.savedShows);
           setLoading(false);
         }
       );

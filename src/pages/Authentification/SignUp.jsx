@@ -166,7 +166,7 @@ const SignUp = () => {
 
               <button
                 type="submit"
-                disabled={setFormSubmitted ? true : false}
+                
                 className={`form-btn ${
                   formSubmitted ? "bg-green-500" : "bg-[#e50914]"
                 }`}

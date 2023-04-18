@@ -25,7 +25,7 @@ const App = () => {
   const saveMovie = async (id, title, img) => {
     if (user?.email) {
       await updateDoc(movieID, {
-        saveShows: arrayUnion({
+        savedShows: arrayUnion({
           id: id,
           title: title,
           img: img,
