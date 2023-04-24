@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const MovieGenresBtn = ({ genre, setGenre, options, setGenreId }) => {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
+  
   const setTitle = (genre, id) => {
     setGenre(genre);
     setGenreId(id)

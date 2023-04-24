@@ -3,7 +3,8 @@ import { FiPlay } from "react-icons/fi";
 import { useState, useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import { motion } from "framer-motion";
+import { item } from '../utils/motionVariants.js';
 
 import MainContext from "../useContext/MainContext";
 import ModalWindow from "./ModalWindow";
@@ -31,7 +32,9 @@ const FavouriteMovieItem = ({ img, title, id, movies }) => {
   };
 
   return (
-    <div className="shadow-lg md:shadow-white/40 shadow-green-400  md:hover:shadow-xl md:hover:shadow-green-400 duration-300">
+    <motion.div
+      variants={item}
+      className="shadow-lg md:shadow-white/40 shadow-green-400  md:hover:shadow-xl md:hover:shadow-green-400 duration-300">
       <ModalWindow
         modalIsOpen={modalIsOpen} 
         setModalIsOpen={setModalIsopen}
@@ -68,7 +71,7 @@ const FavouriteMovieItem = ({ img, title, id, movies }) => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

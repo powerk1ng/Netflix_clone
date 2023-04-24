@@ -4,45 +4,47 @@ import RowCarousel from "../components/RowCarousel";
 import { useContext } from "react";
 import MainContext from "../useContext/MainContext.jsx";
 import SearchedMovies from "../components/SearchedMovies.jsx";
+import NetflixServices from "../utils/NetflixServices";
 
 const Home = () => {
-  
+  const NetflixService = new NetflixServices();
   const { searchVal } = useContext(MainContext);
 
   return (
     <div className="bg-[rgba(0,0,0,1)] pb-10">
-      {!searchVal.length ? (
+      {searchVal.length === 0 ? (
         <>
           {/* Main element */}
-          <Main fetchUrl={request.requestData("now_playing")} trailerVideo={request.requestSingleMovie} />
+          <Main />
 
           {/* carousel- popular movies */}
           <RowCarousel
             title="Popular"
-            fetchUrl={request.requestData("popular")}
+            apiRequestType={NetflixService.requestDataType("popular")}
           />
 
           {/* carousel - Top rated movies*/}
           <RowCarousel
             title="Top rated"
-            fetchUrl={request.requestData("top_rated")}
+            apiRequestType={NetflixService.requestDataType("top_rated")}
           />
 
           {/* carousel - upcoming movies */}
           <RowCarousel
             title="Upcoming"
-            fetchUrl={request.requestData("upcoming")}
+            apiRequestType={NetflixService.requestDataType("upcoming")}
           />
 
           {/* carousel - upcoming movies */}
           <RowCarousel
             title="Trending"
-            fetchUrl={request.requestTrending("tv", 'week')}
+            apiRequestType={NetflixService.requestTrending("tv", "week")}
           />
-        </>
-      ) : (
+        </> 
+        ) 
+        : (
         // searched movies component
-          <SearchedMovies searchVal={searchVal} />
+        <SearchedMovies searchVal={searchVal} />
       )}
     </div>
   );

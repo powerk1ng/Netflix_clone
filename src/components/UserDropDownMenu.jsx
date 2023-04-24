@@ -16,7 +16,7 @@ const UserDropDownMenu = () => {
         }`}>
 
         {/* dropdown */}
-        <ul className="absolute top-[42px] right-0 w-[130px] bg-black/70 hidden group-hover:block border border-gray-200/80 rounded-md p-2">
+        <ul className="absolute hidden group-hover:block duration-300 top-[42px] right-0 w-[130px] bg-black/70 border border-gray-200/80 rounded-md p-3 min-w-[150px]">
           {userName && (
             <p className="text-white mb-3">
             User: <span className="text-green-400 font-bold">{userName}</span>

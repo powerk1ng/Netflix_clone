@@ -3,6 +3,7 @@ import { FiPlay } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import { AnimatePresence, motion } from "framer-motion";
 import MainContext from "../useContext/MainContext";
 
 const MovieItem = ({ id, title, ...movie }) => {
@@ -11,11 +12,14 @@ const MovieItem = ({ id, title, ...movie }) => {
 
   const handleAddToFavourite = () => {
     setLike(!like);
-    saveMovie(id, title, (movie?.backdrop_path ?? movie?.poster_path));
+    saveMovie(id, title, movie?.backdrop_path ?? movie?.poster_path);
   };
 
   return (
-    <div className="relative inline-block h-[240px] w-[250px] md:h-[280px] mr-2 delay-500">
+    <motion.div 
+      initial={{opacity: 0}}
+      whileInView={{opacity: 1, transition:{duration: 3, type:'spring'}}}
+      className="relative inline-block h-[240px] w-[250px] md:h-[280px] mr-2 delay-500">
       {movie.backdrop_path || movie.poster_path ? (
         <img
           className="w-full h-full object-cover shadow-xl rounded-md transition duration peer"
@@ -40,18 +44,29 @@ const MovieItem = ({ id, title, ...movie }) => {
           <FiPlay className="fill-black" size={20} />
         </Link>
 
-        <button
+        <motion.button
           onClick={handleAddToFavourite}
-          className=" w-10 h-10 flex items-center justify-center bg-white hover:bg-zinc-200 rounded-full peer"
+          className={`w-10 h-10 flex items-center justify-center rounded-full peer overflow-hidden hover:scale-105 ${!like? 'bg-white' : 'bg-green-400 hover:bg-green-500'} duration-300`} 
         >
           {like ? (
-            <AiOutlineCheck className="fill-black" size={25} fill="white" />
+            <AnimatePresence>
+              <motion.span
+                initial={{opacity: 0, y: '100%'}}
+                animate={{opacity: 1, y:0, transition:{delay: .1, duration: .4, type: 'spring', damping: 12}}}>
+                <AiOutlineCheck className="fill-white" size={25} fill="white" />
+              </motion.span>
+            </AnimatePresence>
+            
           ) : (
-            <AiOutlinePlus className="fill-black" size={25} fill="white" />
+            <motion.span
+              initial={{opacity: 0, y: '100%'}}
+              animate={{opacity: 1, y:0, transition:{delay: .1, duration: .4, type: 'spring', damping: 9}}}>
+                <AiOutlinePlus className="fill-black" size={25} fill="white" />
+            </motion.span>
           )}
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

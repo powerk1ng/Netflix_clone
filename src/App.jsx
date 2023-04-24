@@ -50,7 +50,7 @@ const App = () => {
     setSearchVal,
     user,
     saveMovie,
-    loading,
+    loading, 
     genreId,
     setGenreId
   };

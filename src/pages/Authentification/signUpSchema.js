@@ -11,7 +11,6 @@ const signUpSchema = Yup.object().shape({
             message: 'Please enter a valid email format'
         }),
         
-
     password: Yup.string()
         .matches(passwordRule, {
             message: 'Password must be stronger'

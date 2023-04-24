@@ -4,8 +4,11 @@ import MovieGenresBtn from '../components/MovieGenresBtn';
 import { useContext, useState } from 'react';
 import SingleGenreMovies from '../components/SingleGenreMovies';
 import MainContext from '../useContext/MainContext';
+import NetflixServices from '../utils/NetflixServices';
 
 const Movies = () => {
+  const NetflixService = new NetflixServices();
+
     const options = [
         { name: "All", id: 1 },
         { name: "Fantasy", id: 14 },
@@ -24,10 +27,10 @@ const Movies = () => {
         <MovieGenresBtn genre={genre} setGenre={setGenre} options={options} setGenreId={setGenreId}/>
         {genreId === 1 ? (
             <>
-                <RowCarousel title="Action Movies" fetchUrl={request.requestGenre(28, page)}/>
-                <RowCarousel title="Comedy Movies" fetchUrl={request.requestGenre(35, page)}/>
-                <RowCarousel title="Horror Movies" fetchUrl={request.requestGenre(27, page)}/>
-                <RowCarousel title="Documentary Movies" fetchUrl={request.requestGenre(99, page)}/>
+                <RowCarousel title="Action Movies" apiRequestType={NetflixService.requestGenre(28, page)}/>
+                <RowCarousel title="Comedy Movies" apiRequestType={NetflixService.requestGenre(35, page)}/>
+                <RowCarousel title="Horror Movies" apiRequestType={NetflixService.requestGenre(27, page)}/>
+                <RowCarousel title="Documentary Movies" apiRequestType={NetflixService.requestGenre(99, page)}/>
             </>
         )
         : (
