@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
 import { Rate } from "antd";
 import { FiPlay } from "react-icons/fi";
-import { AiOutlineCheck, AiOutlinePlus } from "react-icons/ai";
-import MainContext from "../useContext/MainContext";
+import { motion } from "framer-motion";
+
 import formatDate from "../utils/formatDate";
+import AddToFavouritesButton from "./UI/AddToFavouritesButton";
 
 const MovieCard = ({
   id,
@@ -14,18 +14,14 @@ const MovieCard = ({
   vote_average,
   poster_path,
 }) => {
-  const { saveMovie } = useContext(MainContext);
   const releaseDate = new Date(release_date);
-  const [like, setLike] = useState(false);
-
-  const handleAddToFavourite = () => {
-    setLike(!like);
-    saveMovie(id, title, backdrop_path);
-  };
 
   return (
     // card body
-    <div className="rounded-t-md border-b-white border-b rounded-b-md shadow-md shadow-white/40">
+    <motion.div 
+      initial={{opacity: 0}}
+      whileInView={{opacity: 1, transition: {duration: .5, delay: 0.2}}}
+      className="shadow-lg md:shadow-white/40 shadow-green-400  md:hover:shadow-xl md:hover:shadow-green-400 duration-300">
       {/* card top */}
       <div className="w-full h-[220px]">
         {backdrop_path || poster_path ? (
@@ -48,9 +44,11 @@ const MovieCard = ({
         {/* card bottom movie info */}
         <div>
           <h2>{title}</h2>
-          <p className="my-2">{!releaseDate ? 'N/A' : formatDate(releaseDate)}</p>
+          <p className="my-2">
+            {!releaseDate ? "N/A" : formatDate(releaseDate)}
+          </p>
           <div>
-            {vote_average > 0 ? vote_average.toFixed(1) : 'N/A'}
+            {vote_average > 0 ? vote_average.toFixed(1) : "N/A"}
             <Rate
               className="hover:pointer-events-none ml-2"
               allowHalf
@@ -68,21 +66,15 @@ const MovieCard = ({
             <FiPlay className="fill-black" size={20} />
           </Link>
 
-          <button
-            onClick={handleAddToFavourite}
-            className={`w-10 h-10 flex items-center justify-center md:hover:opacity-90 rounded-full peer duration-200 ${
-              like ? "bg-green-400" : "bg-white"
-            }`}
-          >
-            {like ? (
-              <AiOutlineCheck className="fill-black" size={25} fill="white" />
-            ) : (
-              <AiOutlinePlus className="fill-black" size={25} fill="white" />
-            )}
-          </button>
+          {/* add to favourite btn */}
+          <AddToFavouritesButton
+            id={id}
+            title={title}
+            backdrop_path={backdrop_path}
+          />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

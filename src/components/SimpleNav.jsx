@@ -1,24 +1,20 @@
-import { Link, useLocation } from "react-router-dom";
-import Logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
+import Logo from "../assets/logo.png";
 import MainContext from "../useContext/MainContext";
 
 const Header = () => {
-  const [navClass, setNavClass] = useState("");
-  const {resetSearchInput} = useContext(MainContext)
+  const [scrollY, setScrollY] = useState(false);
+  const { resetSearchInput } = useContext(MainContext);
 
   const handleScroll = () => {
     const scrollPos = window.scrollY;
-    if (scrollPos > 0) {
-      setNavClass("bg-black/90");
-    } else {
-      setNavClass("");
-    }
+    scrollPos > 0 ? setScrollY(true) : setScrollY(false)
   };
 
   useEffect(() => {
-    handleScroll()
+    handleScroll();    
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -26,7 +22,9 @@ const Header = () => {
 
   return (
     <header
-      className={`flex justify-between items-center fixed w-full ${navClass} p-4 z-[100] duration-700`}
+      className={`flex justify-between items-center fixed w-full ${
+        scrollY ? "bg-black/90" : ""
+      } p-4 z-[100] duration-700`}
     >
       <nav>
         <Link to="/" onClick={resetSearchInput}>

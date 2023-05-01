@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
+import { motion } from "framer-motion";
+import { container } from "../utils/motionVariants.js";
 
 import request from "../utils/request.js";
 import MovieCard from "./MovieCard.jsx";
@@ -18,7 +20,11 @@ const SearchedMovies = ({ searchVal }) => {
 
   return (
     <div className="text-white bg-black/70 w-full min-h-screen">
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-20 pt-24 px-5">
+      <motion.div 
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-20 pt-24 px-5">
         {searchData.length > 0 ? (
           searchData.map((item) => <MovieCard key={item.id} {...item} />)
         ) : searchVal.length > 1 ? (
@@ -27,7 +33,7 @@ const SearchedMovies = ({ searchVal }) => {
             <p className="text-lg">Please try another search term</p>
           </div>
         ) : null}
-      </div>
+      </motion.div>
     </div>
   );
 };

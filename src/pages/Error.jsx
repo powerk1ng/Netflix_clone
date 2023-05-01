@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-black/90 text-white/90">
+    <div className="flex flex-col justify-center items-center h-screen bg-black/90 text-white/90 p-5 text-center">
       <h1 className="text-6xl font-bold mb-8">404 Not Found</h1>
       <p className="text-3xl mb-8">
         We're sorry, but the page you're looking for doesn't exist.

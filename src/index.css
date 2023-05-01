@@ -20,7 +20,7 @@
     .nav-link {
         @apply md:hover:text-white md:duration-300 relative
     }
-
+  
     .nav-link.active {
         @apply text-white cursor-default 
     }

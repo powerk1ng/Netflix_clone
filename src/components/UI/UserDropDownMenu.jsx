@@ -1,5 +1,5 @@
 import LogoutBtn from "./LogoutBtn";
-import getUserName from '../utils/getNameOfUser.js';
+import getUserName from '../../utils/getNameOfUser.js';
 
 const UserDropDownMenu = () => {
   const userName = getUserName();

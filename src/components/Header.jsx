@@ -5,27 +5,26 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import Logo from "../assets/logo.png";
 import MainContext from "../useContext/MainContext";
 import SearchInput from "./SearchInput";
-import LogoutBtn from "./LogoutBtn";
-import UserDropDownMenu from "./UserDropDownMenu";
+import LogoutBtn from "./UI/LogoutBtn";
+import UserDropDownMenu from "./UI/UserDropDownMenu";
 import getUserName from "../utils/getNameOfUser";
 
 const Header = () => {
-  const [navClass, setNavClass] = useState("");
+  const [scrollY, setScrollY] = useState(false);
   const { resetSearchInput, user } = useContext(MainContext);
   const [click, setClick] = useState(false);
   const location = useLocation();
   const myListBgColor = location.pathname === "/mylist";
   const userName = getUserName();
 
+  
+  const handleScroll = () => {
+    const scrollPos = window.scrollY;
+    scrollPos > 0 ? setScrollY(true) : setScrollY(false)
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY;
-      if (scrollPos > 0) {
-        setNavClass("bg-black/90");
-      } else {
-        setNavClass("");
-      }
-    };
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -57,7 +56,9 @@ const Header = () => {
 
   return (
     <header
-      className={`flex justify-between items-center p-4 z-[150] fixed w-full ${navClass} duration-700`}
+      className={`flex justify-between items-center p-4 z-[150] fixed w-full ${
+        scrollY ? "bg-black/90" : ""
+      } duration-700`}
     >
       <div className="md:flex gap-x-5">
         {/* logo mobile menu body */}

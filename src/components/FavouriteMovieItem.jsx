@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { item } from '../utils/motionVariants.js';
 
 import MainContext from "../useContext/MainContext";
-import ModalWindow from "./ModalWindow";
+import ModalWindow from "./UI/ModalWindow";
 
 const FavouriteMovieItem = ({ img, title, id, movies }) => {
 
