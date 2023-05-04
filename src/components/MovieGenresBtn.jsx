@@ -3,18 +3,22 @@ import React, { useState } from "react";
 const MovieGenresBtn = ({ genre, setGenre, options, setGenreId }) => {
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-  
   const setTitle = (genre, id) => {
     setGenre(genre);
-    setGenreId(id)
+    setGenreId(id);
     setIsSelectOpen(false);
   };
+  
   const openSelectMenu = () => {
     setIsSelectOpen(!isSelectOpen);
   };
 
   return (
-    <div className="absolute right-4 sm:top-18 top-20">
+    <div
+      className={`absolute right-4 ${
+        genre !== "All" ? "sm:top-28 top-20" : ""
+      }`}
+    >
       <button
         className="text-white bg-transparent focus:ring-2 focus:outline-none focus:ring-white font-medium text-sm px-4 sm:py-2.5 py-2 text-right inline-flex items-center justify-between w-[150px] border"
         type="button"

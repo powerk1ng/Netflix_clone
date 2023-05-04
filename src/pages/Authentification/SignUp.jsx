@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
@@ -16,6 +16,13 @@ const SignUp = () => {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    if(location.pathname === '/signup') {
+      document.title = 'Sign Up'
+    }
+  }, [])
 
   return (
     <div className="relative w-full min-h-screen min-[555px]:bg-login bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black">
@@ -50,7 +57,7 @@ const SignUp = () => {
                   setFormSubmitted(false);
                   resetForm();
                   navigate("/");
-                }, 250);
+                }, 150);
               })
               .catch((error) => {
                 switch (error.code) {
@@ -165,8 +172,8 @@ const SignUp = () => {
               </div>
 
               <button
+                disabled={formSubmitted ? true : false}
                 type="submit"
-                
                 className={`form-btn ${
                   formSubmitted ? "bg-green-500" : "bg-[#e50914]"
                 }`}

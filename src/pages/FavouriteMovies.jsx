@@ -8,17 +8,26 @@ import { container } from '../utils/motionVariants.js';
 
 import MainContext from "../useContext/MainContext";
 import FavouriteMovieItem from "../components/FavouriteMovieItem";
+import { useLocation } from "react-router-dom";
 
 const FavouriteMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortOrder, setSortOrder] = useState("z-a"); // asc or desc
   const { user } = useContext(MainContext);
+  const location = useLocation();
 
   useEffect(() => {
-    if (!movies.length) {
+    if(location.pathname === '/mylist') {
+      document.title = 'MyList'
+    }
+  }, [])
+
+  useEffect(() => {
+    if (movies.length === 0) {
       setLoading(true);
     }
+
     const unsubscribe = onSnapshot(
       doc(db, "users", `${user?.email}`),
       (doc) => {

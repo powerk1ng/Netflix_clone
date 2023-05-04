@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import Logo from "../../assets/logo.png";
@@ -11,6 +11,13 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
+  const location = useLocation();
+  
+  useEffect(() => {
+    if(location.pathname === '/login') {
+      document.title = 'Sign In'
+    }
+  }, [])
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -43,6 +50,8 @@ const SignIn = () => {
       }
     }
   };
+
+
 
   return (
     <div className="relative w-full min-h-screen min-[555px]:bg-login bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black">
@@ -101,7 +110,7 @@ const SignIn = () => {
           {/* sign in button */}
           <button
             type="submit"
-            className={`form-btn outline-1 outline-red-800 bg-[#e50914] mt-2`}
+            className={`form-btn outline-1 outline-red-800 mt-2 ${!auth.currentUser ? 'bg-[#e50914]' : 'bg-green-400'}`}
           >
             Sign In
           </button>

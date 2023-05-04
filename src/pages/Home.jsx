@@ -1,7 +1,8 @@
-import request from "../utils/request.js";
+import { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import Main from "../components/Main.jsx";
 import RowCarousel from "../components/RowCarousel";
-import { useContext } from "react";
 import MainContext from "../useContext/MainContext.jsx";
 import SearchedMovies from "../components/SearchedMovies.jsx";
 import NetflixServices from "../utils/NetflixServices";
@@ -9,6 +10,13 @@ import NetflixServices from "../utils/NetflixServices";
 const Home = () => {
   const NetflixService = new NetflixServices();
   const { searchVal } = useContext(MainContext);
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (location.pathname === "/") {
+      document.title = "Home";
+    }
+  }, []);
 
   return (
     <div className="bg-[rgba(0,0,0,1)] pb-10">
@@ -40,9 +48,8 @@ const Home = () => {
             title="Trending"
             apiRequestType={NetflixService.requestTrending("tv", "week")}
           />
-        </> 
-        ) 
-        : (
+        </>
+      ) : (
         // searched movies component
         <SearchedMovies searchVal={searchVal} />
       )}

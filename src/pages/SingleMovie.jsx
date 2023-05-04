@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
@@ -11,7 +11,15 @@ const SingleMovie = () => {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
   const [trailer, setTrailer] = useState();
-  
+  const location = useLocation();
+
+  useEffect(() => {
+    if(location.pathname.includes(movie?.id)) {
+      document.title = movie?.original_title
+    }
+    console.log();
+  }, [movie])
+
   const opts = {
     height: "100%",
     width: "100%",
@@ -35,6 +43,7 @@ const SingleMovie = () => {
               video.name === ("Official Trailer" ?? "Final Trailer") ||
               video.name
           );
+          
           if (trailerVideo) {
             setTrailer(trailerVideo.key);
           }
