@@ -42,17 +42,20 @@ const Main = () => {
   }, []);
 
   // getting movie trailer
+  // getting movie trailer
   useEffect(() => {
-    NetflixService.requestSingleMovie(selectedMovie?.id).then((data) => {
-      const trailer = data.videos?.results.find(
-        (video) =>
-          video.name === ("Official Trailer" ?? "Final Trailer") || video.name
-      );
-      if (trailer) {
-        setTrailer(trailer.key);
-      }
-    });
-  }, [movies]);
+    if (selectedMovie) {
+      NetflixService.requestSingleMovie(selectedMovie.id).then((data) => {
+        const trailer = data.videos.results.find(
+          (video) =>
+            video.name === ("Official Trailer" ?? "Final Trailer") || video.name
+        );
+        if (trailer) {
+          setTrailer(trailer.key);
+        }
+      });
+    }
+  }, [selectedMovie]);
 
   const releaseDate = new Date(selectedMovie?.release_date);
   const formattedDate = formatDate(releaseDate);
@@ -102,11 +105,12 @@ const Main = () => {
           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-black"></div>
 
           {/* text on video */}
-          <motion.div 
+          <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="relative w-full h-full">
+            className="relative w-full h-full"
+          >
             <div className="absolute top-[20%] w-full p-4 md:p-8">
               {/* title of film */}
               <h1 className="sm:text-3xl text-xl md:text-5xl sm:max-w-[450px] max-w-[350px]">
