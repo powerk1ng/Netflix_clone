@@ -1,5 +1,11 @@
 import { DotLoader } from "react-spinners";
-import { useState, useEffect, useCallback, useMemo, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useContext,
+} from "react";
 import { Link } from "react-router-dom";
 import { containerMain, item, container } from "../utils/motionVariants.js";
 import { motion } from "framer-motion";
@@ -42,7 +48,6 @@ const Main = () => {
   }, []);
 
   // getting movie trailer
-  // getting movie trailer
   useEffect(() => {
     if (selectedMovie) {
       NetflixService.requestSingleMovie(selectedMovie.id).then((data) => {
@@ -66,8 +71,9 @@ const Main = () => {
   );
 
   const opts = {
-    height: "100%", // the height of the player
-    width: "100%", // the width of the player
+    height: "100%",
+    width: "100%",
+    volume: 10,
     playerVars: {
       autoplay: 1, // automatically start playing the video when the player loads
       controls: 0, // hide the video player controls
@@ -77,12 +83,11 @@ const Main = () => {
       rel: 0, // do not show related videos at the end of the video playback
       loop: 1, // loop the video playback
       title: 0, // hide the video title
-      start: 0, // start playing the video at the beginning
+      start: 1, // start playing the video at the beginning
       fs: 1, // show fullscreen button in the player
       showinfo: 0, // hide video information, including the video title and uploader information
       iv_load_policy: 3, // do not show video annotations by default
     },
-    volume: "0", // set the player volume to 0
   };
 
   return (
@@ -98,7 +103,6 @@ const Main = () => {
               videoId={trailer}
               iframeClassName="youtube-container"
               opts={opts}
-              volume={opts.volume}
             />
           </div>
 
