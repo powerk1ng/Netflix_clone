@@ -24,7 +24,7 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      if(auth) {
+      if(auth.currentUser.email) {
         navigate("/")
       }
       setEmail("");

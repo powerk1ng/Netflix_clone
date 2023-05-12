@@ -4,7 +4,12 @@ import { Navigate } from "react-router-dom";
 
 const PrivateLogin = ({ children }) => {
   const { user } = useContext(MainContext);
-  return user !== null ? <Navigate to={"/"} /> : children;
+
+  if (user?.email) {
+    return <Navigate to={"/"} />;
+  } else {
+    return children;
+  }
 };
 
 export default PrivateLogin;

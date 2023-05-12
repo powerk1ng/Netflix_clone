@@ -3,9 +3,9 @@ import MainContext from "../useContext/MainContext";
 import { Navigate } from "react-router-dom";
 
 function PrivateRoute({ children }) {
-  const { user, loading } = useContext(MainContext);
+  const { user } = useContext(MainContext);
 
-  if (user === null && !loading) {
+  if (!user?.email) {
     return <Navigate to="/login" />;
   } else {
     return children;

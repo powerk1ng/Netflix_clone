@@ -40,6 +40,7 @@ const App = () => {
       setUser(currentUser);
       setLoading(false);
     });
+    
     return unsubscribe;
   }, []);
 

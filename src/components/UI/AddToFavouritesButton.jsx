@@ -5,14 +5,14 @@ import { likeBtnMotion } from "../../utils/motionVariants";
 
 import MainContext from "../../useContext/MainContext";
 
-const AddToFavouritesButton = ({ id, title, backdrop_path }) => {
+const AddToFavouritesButton = ({ id, title, backdrop_path, poster_path}) => {
   const { saveMovie } = useContext(MainContext);
   const [like, setLike] = useState(false);
 
   const handleAddToFavourite = () => {
     setLike(!like);
-    saveMovie(id, title, backdrop_path);
-  };
+    saveMovie(id, title, (backdrop_path ?? poster_path));
+  }; 
 
   return (
     <motion.button

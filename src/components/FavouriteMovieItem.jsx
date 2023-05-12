@@ -19,6 +19,7 @@ const FavouriteMovieItem = ({ img, title, id, movies }) => {
   };
 
   const movieRef = doc(db, "users", `${user?.email}`);
+  
   const deleteMovie = async (passedId) => {
     try {
       const result = movies.filter((item) => item.id !== passedId);

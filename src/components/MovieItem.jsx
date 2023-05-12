@@ -33,7 +33,7 @@ const MovieItem = ({ id, title, ...movie }) => {
         >
           <FiPlay className="fill-black" size={20} />
         </Link>
-        <AddToFavouritesButton id={id} title={title} backdrop_path={movie?.backdrop_path}/>
+        <AddToFavouritesButton id={id} title={title} backdrop_path={movie.backdrop_path} poster_path={movie.poster_path}/>
       </div>
     </motion.div>
   );

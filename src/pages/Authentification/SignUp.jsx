@@ -53,11 +53,18 @@ const SignUp = () => {
               .then(() => {
                 setFormSubmitted(true);
                 setError("");
-                setTimeout(() => {
+                
+                // setTimeout(() => {
+                //   setFormSubmitted(false);
+                //   resetForm();
+                //   navigate("/");
+                // }, 150);
+
+                if(auth.currentUser?.email) {
                   setFormSubmitted(false);
                   resetForm();
-                  navigate("/");
-                }, 150);
+                  navigate('/');
+                }
               })
               .catch((error) => {
                 switch (error.code) {

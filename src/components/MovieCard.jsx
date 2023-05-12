@@ -14,7 +14,9 @@ const MovieCard = ({
   vote_average,
   poster_path,
 }) => {
-  const releaseDate = new Date(release_date);
+  const releaseDate =  new Date(release_date);
+  
+
 
   return (
     // card body
@@ -52,7 +54,7 @@ const MovieCard = ({
             <Rate
               className="hover:pointer-events-none ml-2"
               allowHalf
-              defaultValue={Math.round(vote_average / 2)}
+              value={vote_average / 2}
             />
           </div>
         </div>
@@ -71,6 +73,7 @@ const MovieCard = ({
             id={id}
             title={title}
             backdrop_path={backdrop_path}
+            poster_path={poster_path}
           />
         </div>
       </div>

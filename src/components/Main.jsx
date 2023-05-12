@@ -25,11 +25,11 @@ const Main = () => {
   const { saveMovie } = useContext(MainContext);
 
   const addMovieToFavourites = useCallback(() => {
-    setAddMovie(!addMovie);
+    setAddMovie(true);
     saveMovie(
       selectedMovie.id,
       selectedMovie.title,
-      selectedMovie?.backdrop_path
+      selectedMovie.backdrop_path ?? selectedMovie.poster_path
     );
   });
 
@@ -55,9 +55,11 @@ const Main = () => {
           (video) =>
             video.name === ("Official Trailer" ?? "Final Trailer") || video.name
         );
+
         if (trailer) {
           setTrailer(trailer.key);
         }
+
       });
     }
   }, [selectedMovie]);
@@ -73,7 +75,6 @@ const Main = () => {
   const opts = {
     height: "100%",
     width: "100%",
-    volume: 10,
     playerVars: {
       autoplay: 1, // automatically start playing the video when the player loads
       controls: 0, // hide the video player controls
@@ -87,6 +88,7 @@ const Main = () => {
       fs: 1, // show fullscreen button in the player
       showinfo: 0, // hide video information, including the video title and uploader information
       iv_load_policy: 3, // do not show video annotations by default
+      volume: 10
     },
   };
 
@@ -131,9 +133,9 @@ const Main = () => {
                 </Link>
                 <button
                   onClick={addMovieToFavourites}
-                  className="text-white hover:text-white hover:bg-green-400 border border-gray-300 hover:border-transparent  duration-200 active:scale-95 outline-none py-1.5 px-3 ml-4"
+                  className={`text-white border border-gray-300 duration-300 active:scale-95 outline-none py-1.5 px-3 ml-4 ${addMovie ? 'bg-green-400' : 'hover:bg-white hover:text-black'}`}
                 >
-                  Add to my list
+                  {addMovie ? 'Added To My List' : 'Add to my list'}
                 </button>
               </div>
 

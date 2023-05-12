@@ -35,6 +35,7 @@ const FavouriteMovies = () => {
         setLoading(false);
       }
     );
+
     return unsubscribe;
   }, [user]);
 
