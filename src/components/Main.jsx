@@ -1,11 +1,5 @@
 import { DotLoader } from "react-spinners";
-import {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useContext,
-} from "react";
+import { useState, useEffect, useCallback, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 import { containerMain, item, container } from "../utils/motionVariants.js";
 import { motion } from "framer-motion";
@@ -59,11 +53,11 @@ const Main = () => {
         if (trailer) {
           setTrailer(trailer.key);
         }
-
       });
     }
   }, [selectedMovie]);
 
+  
   const releaseDate = new Date(selectedMovie?.release_date);
   const formattedDate = formatDate(releaseDate);
 
@@ -88,7 +82,7 @@ const Main = () => {
       fs: 1, // show fullscreen button in the player
       showinfo: 0, // hide video information, including the video title and uploader information
       iv_load_policy: 3, // do not show video annotations by default
-      volume: 10
+      volume: 10,
     },
   };
 
@@ -133,9 +127,13 @@ const Main = () => {
                 </Link>
                 <button
                   onClick={addMovieToFavourites}
-                  className={`text-white border border-gray-300 duration-300 active:scale-95 outline-none py-1.5 px-3 ml-4 ${addMovie ? 'bg-green-400' : 'hover:bg-white hover:text-black'}`}
+                  className={`text-white border border-gray-300 duration-300 active:scale-95 outline-none py-1.5 px-3 ml-4 ${
+                    addMovie
+                      ? "bg-green-400"
+                      : "hover:bg-white hover:text-black"
+                  }`}
                 >
-                  {addMovie ? 'Added To My List' : 'Add to my list'}
+                  {addMovie ? "Added To My List" : "Add to my list"}
                 </button>
               </div>
 

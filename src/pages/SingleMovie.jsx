@@ -10,7 +10,7 @@ const SingleMovie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [trailer, setTrailer] = useState();
+  const [trailer, setTrailer] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
