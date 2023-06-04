@@ -8,6 +8,9 @@ import SearchInput from "./SearchInput";
 import LogoutBtn from "./UI/LogoutBtn";
 import UserDropDownMenu from "./UI/UserDropDownMenu";
 import getUserName from "../utils/getNameOfUser";
+import userLogo from '../assets/user-logo.png';
+import otherUser from '../assets/user-other.jpeg';
+
 
 const Header = () => {
   const [scrollY, setScrollY] = useState(false);
@@ -112,13 +115,8 @@ const Header = () => {
             {/* user pic */}
             <div className="md:hidden flex gap-x-2 items-center">
               <div
-                className={`w-9 h-9 border border-gray-400 rounded-md bg-center bg-cover bg-no-repeat ${
-                  !userName
-                    ? "bg-gray-500"
-                    : userName === "Ken"
-                    ? "bg-user-ken"
-                    : "bg-user-other"
-                }`}
+                className={`w-9 h-9 border border-gray-400 rounded-md bg-center bg-cover bg-no-repeat ${!userName ? 'bg-gray-400' : ''}`}
+                style={{ backgroundImage: userName === 'Ken' ? `url(${userLogo})` : `url(${otherUser})` }}
               ></div>
               <span className="text-green-400">- {userName}</span>
             </div>
