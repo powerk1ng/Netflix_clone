@@ -9,6 +9,8 @@ import MainContext from "../useContext/MainContext.jsx";
 import trancateString from "../utils/truncateString.js";
 import NetflixServices from "../utils/NetflixServices.js";
 
+
+
 const Main = () => {
   const NetflixService = new NetflixServices();
   const [movies, setMovies] = useState([]);

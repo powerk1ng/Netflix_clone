@@ -1,10 +1,11 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
+import {requestSingleMovie} from '../utils/request';
 
 import SimpleNav from "../components/SimpleNav.jsx";
 import Youtube from "react-youtube";
-import NetflixServices from "../utils/NetflixServices.js";
+
 
 const SingleMovie = () => {
   const { id } = useParams();
@@ -12,14 +13,13 @@ const SingleMovie = () => {
   const [loading, setLoading] = useState(false);
   const [trailer, setTrailer] = useState(null);
   const location = useLocation();
-  const NetflixService = new NetflixServices;
   
-  useEffect(() => {
-    if(location.pathname.includes(movie?.id)) {
-      document.title = movie?.original_title
-    }
 
-  }, [movie])
+  useEffect(() => {
+    if (location.pathname.includes(movie?.id)) {
+      document.title = movie?.original_title;
+    }
+  }, [movie]);
 
   const opts = {
     height: "100%",
@@ -33,25 +33,28 @@ const SingleMovie = () => {
 
 
   useEffect(() => {
+    
     setLoading(true);
     setTimeout(() => {
-      fetch(NetflixService.requestSingleMovie(id))
+      fetch(requestSingleMovie(id))
         .then((res) => res.json())
         .then((data) => {
-          setMovie(data);
+          setMovie(data);  
           const trailerVideo = data.videos?.results.find(
             (video) =>
               video.name === ("Official Trailer" ?? "Final Trailer") ||
               video.name
           );
-          
+
           if (trailerVideo) {
             setTrailer(trailerVideo.key);
+            console.log(trailerVideo.key);
           }
           setLoading(false);
         })
         .catch((error) => {
           setLoading(false);
+          console.log(error);
         });
     }, 1500);
   }, []);
