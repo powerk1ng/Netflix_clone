@@ -1,28 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&display=swap");
 
+@font-face {
+    font-family: "Netflix-regular";
+    src: url('./fonts/NetflixSans-Regular.woff2');
+}
+
+body {
+    font-family: 'Netflix-regular', 'Helvetica Neue';
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-@layer base {
-    @font-face {
-        font-family: "Netflix-regular";
-        src: url('./fonts/NetflixSans-Regular.woff2');
-    }
-
-    body {
-        font-family: 'Netflix-regular', 'Helvetica Neue';
-    }
-}
-
 @layer components {
     .nav-link {
         @apply md:hover:text-white md:duration-300 relative
     }
-  
+
     .nav-link.active {
-        @apply text-white cursor-default 
+        @apply text-white cursor-default
     }
 
     .nav-mobile {
