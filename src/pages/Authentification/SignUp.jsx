@@ -49,11 +49,11 @@ const SignUp = () => {
               return;
             }
 
-            setDoc(doc(db, "users", values.email), {
+            setDoc(doc(db, "users", values.email.toLowerCase()), {
               savedShows: [],
             });
 
-            createUserWithEmailAndPassword(auth, values.email, values.password)
+            createUserWithEmailAndPassword(auth, values.email.toLowerCase(), values.password)
               .then(() => {
                 setFormSubmitted(true);
                 setError("");
