@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,regular,500,600,700&display=swap");
 
 @font-face {
-    font-family: "Netflix-regular";
-    src: url('./fonts/NetflixSans-Regular.woff2');
-}
-
-body {
-    font-family: 'Netflix-regular', 'Helvetica Neue', 'Poppins';
-}
+    font-family: 'Netflix-regular';
+    src: url('./fonts/NetflixSans-Regular.woff2') format('woff2'),
+    url('./fonts/NetflixSans-Regular.woff') format('woff'),
+    url('./fonts/NetflixSans-Regular.ttf') format('truetype');
+  }
+  
+  body {
+    font-family: 'Netflix-regular', 'Helvetica Neue';
+  }
 
 @tailwind base;
 @tailwind components;
