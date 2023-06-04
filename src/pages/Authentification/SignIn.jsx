@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
 import Logo from "../../assets/logo.png";
+import LoginBg from '../../assets/auth-bg.jpg';
 import ShowPassword from "./ShowPassword";
 
 const SignIn = () => {
@@ -54,7 +55,9 @@ const SignIn = () => {
 
 
   return (
-    <div className="relative w-full min-h-screen min-[555px]:bg-login bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black">
+    <div
+      style={{backgroundImage: `url(${LoginBg})`}} 
+      className="relative w-full min-h-screen bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black">
       <div className="min-[555px]:mx-auto max-w-[1180px] p-5">
         <div>
           <img className="min-[555px]:h-[29px] h-12" src={Logo} alt="logo" />

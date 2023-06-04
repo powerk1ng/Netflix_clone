@@ -9,6 +9,7 @@ import { db } from "../../../firebase";
 import Logo from "../../assets/logo.png";
 import signUpSchema from "./signUpSchema.js";
 import ShowPassword from "./ShowPassword";
+import LoginBg from "../../assets/auth-bg.jpg";
 
 const SignUp = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -17,15 +18,18 @@ const SignUp = () => {
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   useEffect(() => {
-    if(location.pathname === '/signup') {
-      document.title = 'Sign Up'
+    if (location.pathname === "/signup") {
+      document.title = "Sign Up";
     }
-  }, [])
+  }, []);
 
   return (
-    <div className="relative w-full min-h-screen min-[555px]:bg-login bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black">
+    <div
+      style={{ backgroundImage: `url(${LoginBg})` }}
+      className="relative w-full min-h-screen bg-cover bg-fixed bg-no-repeat bg-blend-multiply min-[555px]:bg-black/50 bg-black"
+    >
       <div className="min-[555px]:mx-auto max-w-[1180px] p-5">
         <div>
           <img className="min-[555px]:h-[29px] h-12" src={Logo} alt="logo" />
@@ -53,17 +57,17 @@ const SignUp = () => {
               .then(() => {
                 setFormSubmitted(true);
                 setError("");
-                
+
                 // setTimeout(() => {
                 //   setFormSubmitted(false);
                 //   resetForm();
                 //   navigate("/");
                 // }, 150);
 
-                if(auth.currentUser?.email) {
+                if (auth.currentUser?.email) {
                   setFormSubmitted(false);
                   resetForm();
-                  navigate('/');
+                  navigate("/");
                 }
               })
               .catch((error) => {
@@ -147,7 +151,7 @@ const SignUp = () => {
                 <Field
                   required
                   name="confirmPassword"
-                  type={showConfirmPass ? 'text' : 'password'}
+                  type={showConfirmPass ? "text" : "password"}
                   className={`form-input peer ${
                     errors.confirmPassword && touched.confirmPassword
                       ? "border-b-[#E87C03]"
@@ -161,10 +165,10 @@ const SignUp = () => {
                 )}
 
                 <ShowPassword
-                    password={values.confirmPassword}
-                    showPass={showConfirmPass}
-                    setShowPass={setShowConfirmPass}
-                  />
+                  password={values.confirmPassword}
+                  showPass={showConfirmPass}
+                  setShowPass={setShowConfirmPass}
+                />
               </div>
 
               {/* acceot terms */}
