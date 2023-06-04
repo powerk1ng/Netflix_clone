@@ -1,5 +1,5 @@
 class NetflixServices {
-
+    
     _apiKey = import.meta.env.VITE_DATAKEY;
     _baseUrl = 'https://api.themoviedb.org/3';
     page = Math.floor(Math.random() * 5 + 1);

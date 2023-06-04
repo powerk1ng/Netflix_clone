@@ -102,13 +102,13 @@ const Header = () => {
                 : "text-[#b3b3b3]"
             } text-[14px] max-md:pt-16 max-md:pl-5`}
           >
-            <NavLink to="/" className="nav-link">
+            <NavLink onClick={menuOpen} to="/" className="nav-link">
               Home
             </NavLink>
-            <NavLink to="/movies" className="nav-link">
+            <NavLink onClick={menuOpen} to="/movies" className="nav-link">
               Movies
             </NavLink>
-            <NavLink to="/mylist" className="nav-link">
+            <NavLink onClick={menuOpen} to="/mylist" className="nav-link">
               My List
             </NavLink>
 

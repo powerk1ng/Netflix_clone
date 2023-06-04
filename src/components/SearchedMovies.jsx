@@ -3,15 +3,16 @@ import { useDebounce } from "use-debounce";
 import { motion } from "framer-motion";
 import { container } from "../utils/motionVariants.js";
 
-import request from "../utils/request.js";
 import MovieCard from "./MovieCard.jsx";
+import NetflixServices from "../utils/NetflixServices.js";
 
 const SearchedMovies = ({ searchVal }) => {
   const [searchData, setSearchData] = useState([]);
   const [debouncedSearchVal] = useDebounce(searchVal, 800);
+  const NetflixService = new NetflixServices;
 
   useEffect(() => {
-    fetch(request.requestSearch(debouncedSearchVal))
+    fetch(NetflixService.requestSearch(debouncedSearchVal))
       .then((res) => res.json())
       .then((data) => {
         setSearchData(data.results);

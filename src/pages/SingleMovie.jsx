@@ -2,9 +2,9 @@ import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
-import request from "../utils/request.js";
 import SimpleNav from "../components/SimpleNav.jsx";
 import Youtube from "react-youtube";
+import NetflixServices from "../utils/NetflixServices.js";
 
 const SingleMovie = () => {
   const { id } = useParams();
@@ -12,12 +12,13 @@ const SingleMovie = () => {
   const [loading, setLoading] = useState(false);
   const [trailer, setTrailer] = useState(null);
   const location = useLocation();
-
+  const NetflixService = new NetflixServices;
+  
   useEffect(() => {
     if(location.pathname.includes(movie?.id)) {
       document.title = movie?.original_title
     }
-    console.log();
+
   }, [movie])
 
   const opts = {
@@ -34,7 +35,7 @@ const SingleMovie = () => {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      fetch(request.requestSingleMovie(id))
+      fetch(NetflixService.requestSingleMovie(id))
         .then((res) => res.json())
         .then((data) => {
           setMovie(data);
@@ -51,7 +52,6 @@ const SingleMovie = () => {
         })
         .catch((error) => {
           setLoading(false);
-          console.log(error);
         });
     }, 1500);
   }, []);

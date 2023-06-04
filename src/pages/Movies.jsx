@@ -1,4 +1,3 @@
-import request from "../utils/request";
 import RowCarousel from "../components/RowCarousel";
 import MovieGenresBtn from "../components/MovieGenresBtn";
 import { useContext, useState, useEffect } from "react";
