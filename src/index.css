@@ -3,13 +3,13 @@
 
 @font-face {
     font-family: 'Netflix-regular';
-    src: url('./fonts/NetflixSans-Regular.woff2') format('woff2'),
-    url('./fonts/NetflixSans-Regular.woff') format('woff'),
-    url('./fonts/NetflixSans-Regular.ttf') format('truetype');
+    src: url('/fonts/NetflixSans-Regular.woff2') format('woff2'),
+         url('/fonts/NetflixSans-Regular.woff') format('woff'),
+         url('/fonts/NetflixSans-Regular.ttf') format('truetype');
   }
   
   body {
-    font-family: 'Netflix-regular', 'Bebas Neue', sans-serif;
+    font-family: 'Netflix-regular', 'Helvetica Neue', sans-serif;
   }
 
 @tailwind base;
