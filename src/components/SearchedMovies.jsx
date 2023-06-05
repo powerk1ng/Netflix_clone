@@ -9,13 +9,16 @@ import NetflixServices from "../utils/NetflixServices.js";
 const SearchedMovies = ({ searchVal }) => {
   const [searchData, setSearchData] = useState([]);
   const [debouncedSearchVal] = useDebounce(searchVal, 800);
-  const NetflixService = new NetflixServices;
+  const NetflixService = new NetflixServices();
 
+  
   useEffect(() => {
-    fetch(NetflixService.requestSearch(debouncedSearchVal))
-      .then((res) => res.json())
+    NetflixService.requestSearch(debouncedSearchVal)
       .then((data) => {
         setSearchData(data.results);
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
       });
   }, [debouncedSearchVal]);
 
